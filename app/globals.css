@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Bricolage Grotesque", "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  /* shadcn/ui tokens, mapped onto the SriZen navy/cyan palette (HSL, no commas) */
+  --background: 0 0% 100%;
+  --foreground: 222 89% 20%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 89% 20%;
+  --primary: 231 100% 20%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 216 33% 97%;
+  --secondary-foreground: 231 100% 20%;
+  --muted: 216 33% 97%;
+  --muted-foreground: 220 8% 46%;
+  --accent: 180 100% 50%;
+  --accent-foreground: 231 100% 10%;
+  --border: 231 100% 20%;
+  --input: 231 40% 88%;
+  --ring: 180 100% 50%;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-ink font-body antialiased overflow-x-hidden;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-bold leading-[1.05] tracking-[-0.01em];
+  }
+  ::selection {
+    background: #00ffff;
+    color: #00072e;
+  }
+  :focus-visible {
+    outline: 2px solid #00ffff;
+    outline-offset: 3px;
+  }
+
+  /* Respect motion sensitivity site-wide, including the scroll-jacking hero */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Applied to <body> by the scroll-expansion hero while it "owns" the scroll,
+     so the page behind it never fights the wheel/touch handlers. */
+  body.scroll-lock {
+    overflow: hidden;
+    height: 100dvh;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply max-w-container mx-auto px-6 md:px-10;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[12.5px] tracking-[.22em] uppercase text-navy flex items-center gap-2.5 mb-5 font-medium;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply w-[26px] h-px bg-navy inline-block;
+  }
+  .eyebrow-on-dark {
+    @apply text-cyan;
+  }
+  .eyebrow-on-dark::before {
+    @apply bg-cyan;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-3 px-7 py-4 rounded-xl text-base font-semibold tracking-[.01em] transition-all duration-300 ease-premium relative overflow-hidden;
+  }
+  .btn-primary {
+    @apply bg-navy text-white hover:bg-navy-deep hover:-translate-y-0.5 hover:shadow-[0_12px_30px_-10px_rgba(0,15,102,0.5)];
+  }
+  .btn-ghost {
+    @apply border border-white/35 text-white bg-white/5 backdrop-blur-md hover:border-cyan hover:text-cyan;
+  }
+  .btn-ghost-solid {
+    @apply border border-navy/25 text-navy bg-transparent hover:border-navy hover:bg-navy/5;
+  }
+  .btn-outline-navy {
+    @apply border border-navy/25 text-navy hover:border-navy hover:bg-navy hover:text-white;
+  }
+  .btn .arrow {
+    @apply transition-transform duration-300 ease-premium;
+  }
+  .btn:hover .arrow {
+    @apply translate-x-1;
+  }
+  .btn:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-cyan;
+  }
+
+  .section-head {
+    @apply max-w-[720px] mb-16;
+  }
+  .section-head h2 {
+    @apply text-[34px] md:text-[54px] tracking-[-0.015em];
+  }
+  .section-head p {
+    @apply mt-5 text-lg leading-relaxed text-ink-muted max-w-[600px];
+  }
+
+  /* Scroll-reveal: toggled via useReveal hook adding data-in="true" */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s cubic-bezier(0.16, 0.84, 0.24, 1),
+      transform 0.9s cubic-bezier(0.16, 0.84, 0.24, 1);
+  }
+  .reveal[data-in="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Floating label form fields */
+  .field {
+    @apply relative mb-6;
+  }
+  .field input,
+  .field textarea {
+    @apply w-full bg-transparent border-0 border-b border-navy/20 pt-3.5 pb-2.5 text-[15px] font-body text-ink transition-colors duration-300 focus:outline-none focus:border-navy;
+  }
+  .field textarea {
+    @apply resize-none h-[90px];
+  }
+  .field label {
+    @apply absolute left-0 top-3.5 text-[15px] text-ink-muted pointer-events-none transition-all duration-200 ease-premium;
+  }
+  .field input:focus ~ label,
+  .field input:not(:placeholder-shown) ~ label,
+  .field textarea:focus ~ label,
+  .field textarea:not(:placeholder-shown) ~ label {
+    @apply -top-3.5 text-[11.5px] tracking-[.06em] text-navy uppercase font-mono;
+  }
+
+  /* Hero scroll indicator drip */
+  .scroll-track {
+    @apply w-px h-[54px] bg-white/20 relative overflow-hidden;
+  }
+  .scroll-track::after {
+    content: "";
+    @apply absolute left-0 w-full bg-cyan;
+    top: -40%;
+    height: 40%;
+    animation: scrollDrip 2.2s ease-in-out infinite;
+  }
+
+  /* Hero headline line-reveal mask */
+  .line-mask {
+    @apply block overflow-hidden;
+  }
+
+  /* Visually-hidden but screen-reader accessible helper text */
+  .sr-only-focusable {
+    @apply sr-only;
+  }
+  .sr-only-focusable:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[2000] bg-navy text-white px-4 py-2 rounded-md;
+  }
+}
