@@ -1,4 +1,3 @@
-// app/projects/miorah/components/Helpers.tsx
 export function Stat({ value, label, light }: { value: string; label: string; light?: boolean }) {
   return (
     <div>

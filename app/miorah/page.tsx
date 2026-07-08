@@ -1,9 +1,12 @@
+// app/projects/miorah/page.tsx
 "use client";
 
 import { useReveal } from "./hooks/useReveal";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { VillaConfig } from "./components/VillaConfig";
+import { FloorPlans } from "./components/FloorPlans";
+import { Gallery } from "./components/Gallery";
 import { WhyChoose } from "./components/WhyChoose";
 import { Clubhouse } from "./components/Clubhouse";
 import { Location } from "./components/Location";
@@ -13,17 +16,20 @@ export default function MiorahPage() {
   const heroRef = useReveal<HTMLDivElement>();
   const aboutRef = useReveal<HTMLDivElement>();
   const specRef = useReveal<HTMLDivElement>();
+  const plansRef = useReveal<HTMLDivElement>();
+  const galleryRef = useReveal<HTMLDivElement>();
   const whyRef = useReveal<HTMLDivElement>();
   const clubRef = useReveal<HTMLDivElement>();
   const locRef = useReveal<HTMLDivElement>();
   const amenRef = useReveal<HTMLDivElement>();
-  const contactRef = useReveal<HTMLDivElement>();
 
   return (
     <main className="bg-white">
       <Hero ref={heroRef} />
       <About ref={aboutRef} />
       <VillaConfig ref={specRef} />
+      <FloorPlans ref={plansRef} />
+      <Gallery ref={galleryRef} />
       <WhyChoose ref={whyRef} />
       <Clubhouse ref={clubRef} />
       <Location ref={locRef} />

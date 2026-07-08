@@ -1,4 +1,3 @@
-// app/projects/miorah/components/Amenities.tsx
 import { forwardRef } from "react";
 import { amenities } from "../data";
 

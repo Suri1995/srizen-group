@@ -1,4 +1,3 @@
-// app/projects/miorah/components/Hero.tsx
 import { forwardRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Stat } from "./Helpers";

@@ -1,4 +1,3 @@
-// app/projects/miorah/components/Clubhouse.tsx
 import { forwardRef } from "react";
 import { highlights } from "../data";
 

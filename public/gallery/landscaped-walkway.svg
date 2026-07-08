@@ -1,0 +1,27 @@
+<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000a52"/>
+      <stop offset="100%" stop-color="#00072e"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#00e6e6" opacity="0.12"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="700" fill="url(#bg)"/>
+  <rect width="900" height="700" fill="url(#dots)"/>
+  <rect x="18" y="18" width="864" height="664" fill="none" stroke="#00e6e6" stroke-opacity="0.18" stroke-width="1.5"/>
+  <g transform="translate(450.0,310.0)" stroke="#00e6e6" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+<circle cx="-90" cy="-20" r="26"/>
+<line x1="-90" y1="6" x2="-90" y2="60"/>
+<circle cx="80" cy="-45" r="34"/>
+<line x1="80" y1="-11" x2="80" y2="60"/>
+<path d="M -150 80 Q 0 40 150 80"/>
+
+  </g>
+  <text x="48" y="64" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="3" fill="#00e6e6" fill-opacity="0.75" font-weight="600">EXTERIORS</text>
+  <line x1="48" y1="80" x2="90" y2="80" stroke="#00e6e6" stroke-width="1.5" opacity="0.6"/>
+  <text x="48" y="644" font-family="Bricolage Grotesque, Inter, sans-serif" font-size="30" fill="#ffffff" font-weight="700">Landscaped Walkway</text>
+  <text x="48" y="674" font-family="IBM Plex Mono, monospace" font-size="12.5" letter-spacing="2" fill="#ffffff" fill-opacity="0.45">MIORAH BY SRIZEN &#8226; PLACEHOLDER — REPLACE WITH REAL PHOTOGRAPHY</text>
+</svg>

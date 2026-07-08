@@ -1,4 +1,3 @@
-// app/projects/miorah/components/About.tsx
 import { forwardRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { InfoTile } from "./Helpers";
