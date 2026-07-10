@@ -8,7 +8,7 @@ import WhyChoose from "@/components/WhyChoose";
 import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import CTABanner from "@/components/home/CTABanner";
-import WhoWeAre from "@/components/Whoweare";
+import WhoWeAre from "@/components/WhoWeAre";
 
 export default function Home() {
   return (
