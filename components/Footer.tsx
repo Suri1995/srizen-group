@@ -18,7 +18,7 @@ export default function Footer() {
               alt="SriZen Group"
               width={140}
               height={34}
-              className="h-8 w-auto brightness-0 invert"
+              className="h-12 w-auto brightness-0 invert"
             />
             <p className="mt-6 text-sm leading-relaxed max-w-[280px] text-white/45">
               Building tomorrow with precision — construction, infrastructure, engineering and

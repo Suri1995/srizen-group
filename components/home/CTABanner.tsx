@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function CTABanner() {
   return (
-    <section className="relative py-28 text-white overflow-hidden">
-      <div className="absolute inset-0 bg-navy-deep" />
+    <section className="relative py-8 md:py-20 text-white overflow-hidden">
+      <div className="absolute inset-0 bg-navy" />
       <svg
         viewBox="0 0 300 300"
         fill="none"
@@ -21,12 +21,12 @@ export default function CTABanner() {
       <div className="wrap relative z-[1] flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
         <div>
           <p className="eyebrow eyebrow-on-dark">Let&apos;s Talk</p>
-          <h2 className="text-[30px] md:text-[44px] max-w-[16ch]">
+          <h2 className="text-[30px] md:text-[44px] max-w-4xl">
             Ready to start engineering your next project?
           </h2>
         </div>
         <div className="flex gap-4 flex-wrap shrink-0">
-          <Link href="/contact" className="btn btn-primary">
+          <Link href="/contact" className="btn btn-primary border border-gray-300">
             Get a Quote <span className="arrow">→</span>
           </Link>
           <Link href="/careers" className="btn btn-ghost">

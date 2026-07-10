@@ -8,11 +8,13 @@ import WhyChoose from "@/components/WhyChoose";
 import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import CTABanner from "@/components/home/CTABanner";
+import WhoWeAre from "@/components/Whoweare";
 
 export default function Home() {
   return (
     <>
       <HomeHero />
+      <WhoWeAre/>
       <MarqueeStrip />
       <Stats />
       <AboutTeaser />

@@ -34,7 +34,7 @@ export default function Navbar() {
             alt="SriZen Group"
             width={160}
             height={40}
-            className={`h-8 w-auto transition-all duration-500 ${solid ? "" : "brightness-0 invert"}`}
+            className={`h-12 w-auto transition-all duration-500 ${solid ? "" : "brightness-0 invert"}`}
             priority
           />
         </Link>
@@ -42,6 +42,36 @@ export default function Navbar() {
         <nav className="hidden lg:flex items-center gap-9">
           {navLinks.map((link) => {
             const active = pathname === link.href;
+
+            // The Miorah link carries its own full-colour logo (teal/gold),
+            // so it can't use the invert-on-transparent trick the rest of
+            // the nav relies on — instead it always sits on a small light
+            // chip, which keeps it legible whether the navbar itself is
+            // transparent (over the dark hero) or solid.
+            if (link.label === "Miorah") {
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-label="Miorah by SriZen"
+                  className="group relative flex items-center"
+                >
+                  <Image
+                    src="/assets/miorah.png"
+                    alt="Miorah by SriZen"
+                    width={480}
+                    height={325}
+                    className="h-10 w-auto pb-3"
+                  />
+                  <span
+                    className={`absolute left-0 -bottom-0.5 h-px transition-all duration-300 ease-premium group-hover:w-full ${
+                      active ? "w-full" : "w-0"
+                    } ${solid ? "bg-navy" : "bg-cyan"}`}
+                  />
+                </Link>
+              );
+            }
+
             return (
               <Link
                 key={link.href}
@@ -94,11 +124,23 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="lg:hidden fixed inset-0 top-[74px] bg-navy flex flex-col items-start gap-6 px-8 py-10 z-[999] overflow-y-auto">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-white text-lg font-medium">
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.label === "Miorah" ? (
+              <Link key={link.href} href={link.href} aria-label="Miorah by SriZen">
+                <Image
+                  src="/assets/miorah-logo.png"
+                  alt="Miorah by SriZen"
+                  width={480}
+                  height={325}
+                  className="h-7 w-auto"
+                />
+              </Link>
+            ) : (
+              <Link key={link.href} href={link.href} className="text-white text-lg font-medium">
+                {link.label}
+              </Link>
+            )
+          )}
           <Link href="/contact" className="btn btn-ghost mt-2">
             Get a Quote
           </Link>
