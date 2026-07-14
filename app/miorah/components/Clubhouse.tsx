@@ -32,7 +32,7 @@ export const Clubhouse = forwardRef<HTMLDivElement>((props, ref) => {
             {/* Replace with: clubhouse render / pool deck photography */}
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src="/images/miorah/clubhouse.jpg"
+                src="/images/clubhouse.png"
                 alt="MIORAH clubhouse and pool deck"
                 className="h-[420px] w-full object-cover md:h-[520px]"
               />

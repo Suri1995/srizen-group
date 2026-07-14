@@ -116,13 +116,19 @@ export const values: ValueItem[] = [
   { title: "Approach", copy: "Design-led thinking paired with disciplined project management and execution." },
 ];
 
+export interface TimelineItem {
+  year: string;
+  title: string;
+  copy: string;
+}
+
 export const timeline: TimelineItem[] = [
-  { year: "2008", copy: "SriZen Group founded in Hyderabad with a single civil engineering contract." },
-  { year: "2013", copy: "Expanded into commercial construction, delivering our first Grade-A office park." },
-  { year: "2017", copy: "Launched an in-house MEP and design division, enabling turnkey delivery." },
-  { year: "2020", copy: "Crossed 100 completed projects; opened offices in Mumbai and Bengaluru." },
-  { year: "2023", copy: "Entered infrastructure and government sectors with our first bridge contract." },
-  { year: "2026", copy: "320+ engineers, 240+ projects delivered across 26 cities." },
+  { year: "2008", title: "Foundation", copy: "SriZen Group founded in Hyderabad with a single civil engineering contract." },
+  { year: "2013", title: "Commercial Expansion", copy: "Expanded into commercial construction, delivering our first Grade-A office park." },
+  { year: "2017", title: "MEP Division Launch", copy: "Launched an in-house MEP and design division, enabling turnkey delivery." },
+  { year: "2020", title: "100-Project Milestone", copy: "Crossed 100 completed projects; opened offices in Mumbai and Bengaluru." },
+  { year: "2023", title: "Infrastructure Entry", copy: "Entered infrastructure and government sectors with our first bridge contract." },
+  { year: "2026", title: "National Scale", copy: "320+ engineers, 240+ projects delivered across 26 cities." },
 ];
 
 export const leadership: LeadershipMember[] = [

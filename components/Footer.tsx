@@ -9,9 +9,9 @@ interface FooterColProps {
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-deep text-white/65 pt-24">
-      <div className="wrap">
-        <div className="grid md:grid-cols-[1.3fr_0.8fr_0.8fr_0.8fr_1fr] gap-12 pb-20 border-b border-white/10">
+    <footer className="bg-navy-deep text-white/65 pt-24 w-full overflow-x-hidden">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_0.8fr_1fr] gap-8 sm:gap-12 pb-20 border-b border-white/10">
           <div>
             <Image
               src="/assets/srizen-logo.png"
@@ -64,9 +64,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex justify-between flex-wrap gap-3 py-7 text-[13px] text-white/40">
+        <div className="flex flex-col sm:flex-row justify-between flex-wrap gap-3 py-7 text-[13px] text-white/40">
           <span>© 2026 SriZen Group. All rights reserved.</span>
-          <span>Privacy Policy · Terms of Service</span>
+          <span className="flex gap-3">
+            <Link href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
+            <span>·</span>
+            <Link href="/terms" className="hover:text-white/70 transition-colors">Terms of Service</Link>
+          </span>
         </div>
       </div>
     </footer>
