@@ -84,7 +84,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ease-premium ${
           scrolled
-            ? "bg-white/80 backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.06)] border-b border-border/50"
+            ? "bg-gray-200 backdrop-blur-xl"
             : "bg-transparent"
         }`}
       >
@@ -132,7 +132,7 @@ export default function Navbar() {
                       className="h-8 w-auto"
                     />
                     {active && (
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-sky-400 rounded-full" />
+                      <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-sky-400 rounded-full" />
                     )}
                   </Link>
                 );
@@ -142,7 +142,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 rounded-lg text-[14px] font-medium transition-all duration-300 ${
+                  className={`relative inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-[14px] font-medium leading-none transition-all duration-300 ${
                     scrolled
                       ? active
                         ? "text-primary bg-primary/5"
@@ -155,7 +155,7 @@ export default function Navbar() {
                   {link.label}
                   {active && (
                     <motion.span
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-primary rounded-full"
+                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-sky-400 rounded-full"
                       layoutId="active-indicator"
                       transition={{ duration: 0.3 }}
                     />

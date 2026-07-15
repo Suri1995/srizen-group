@@ -16,7 +16,7 @@ export default function ProjectsPage() {
         eyebrow="Our Portfolio"
         title="Projects that define skylines"
         subtitle="240+ completed projects across residential, commercial, industrial, infrastructure and government sectors."
-        image="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2400&auto=format&fit=crop"
+        image="https://images.unsplash.com/photo-1624417963912-8532660d9de8?q=80&w=1200&auto=format&fit=crop"
         crumb="Projects"
       />
       <Projects />
