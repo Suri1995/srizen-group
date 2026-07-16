@@ -261,8 +261,8 @@ export const projects: Project[] = [
     description: "A high-throughput logistics and distribution hub engineered around automated material handling and heavy-load flooring.",
     gallery: [
       "https://images.unsplash.com/photo-1578776349090-de61da00ff1a?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1581091012184-7dc7c6c6b8b7?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1741655262435-4890ab9918fa?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1749244768351-2726dc23d26c?q=80&w=1200&auto=format&fit=crop",
     ],
   },
   {
@@ -313,7 +313,7 @@ export const projects: Project[] = [
     gallery: [
       "https://images.unsplash.com/photo-1627327053419-fe894c4650ed?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1758448093806-88b2089068ab?q=80&w=1200&auto=format&fit=crop",
     ],
   },
   {
@@ -329,8 +329,8 @@ export const projects: Project[] = [
     description: "A LEED Platinum-targeted technology campus with radiant cooling and extensive green roof terracing across a five-building campus.",
     gallery: [
       "https://images.unsplash.com/photo-1492554929733-56d94d6b2fc3?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1703355685952-03ed19f70f51?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1706689656095-168768dc20a5?q=80&w=1200&auto=format&fit=crop",
     ],
   },
   {
@@ -364,7 +364,7 @@ export const projects: Project[] = [
     gallery: [
       "https://images.unsplash.com/photo-1588773146025-a92b8557c72c?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1545558014-8692077e9b5c?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1759802339352-66aa52a9fcd6?q=80&w=1200&auto=format&fit=crop",
     ],
   },
 ];

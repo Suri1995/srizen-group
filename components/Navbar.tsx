@@ -129,7 +129,9 @@ export default function Navbar() {
                       alt="Miorah by SriZen"
                       width={480}
                       height={325}
-                      className="h-8 w-auto"
+                      className={`h-8 w-auto ${
+                scrolled ? "" : "brightness-0 invert"
+              }`}
                     />
                     {active && (
                       <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-sky-400 rounded-full" />
