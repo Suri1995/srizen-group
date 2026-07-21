@@ -88,7 +88,7 @@ export default function HomeHero() {
     <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden bg-[#00072e] py-8 sm:pb-20 sm:pt-32 lg:min-h-[92vh]">
       <div ref={imgWrapRef} className="absolute -inset-y-14 inset-x-0 will-change-transform">
         <Image
-          src="/images/hero-villas.jpg"
+          src="/images/hero/home.webp"
           alt="SriZen Group villa community at dusk"
           fill
           priority
