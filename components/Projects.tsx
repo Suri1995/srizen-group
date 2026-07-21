@@ -16,10 +16,30 @@ export default function Projects() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [direction, setDirection] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [pageSize, setPageSize] = useState(PAGE_SIZE);
 
   const filtered = projects.filter((p) => filter === "all" || p.cat === filter);
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  
+  // Adjust page size based on screen width
+  useEffect(() => {
+    const updatePageSize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setPageSize(6);
+      } else if (width >= 768) {
+        setPageSize(4);
+      } else {
+        setPageSize(4); // Mobile uses carousel, not pagination
+      }
+    };
+
+    updatePageSize();
+    window.addEventListener('resize', updatePageSize);
+    return () => window.removeEventListener('resize', updatePageSize);
+  }, []);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
 
   // Mobile: Group projects into slides of 2
   const mobileSlides = [];
@@ -30,7 +50,7 @@ export default function Projects() {
   useEffect(() => {
     setPage(1);
     setMobileSlide(0);
-  }, [filter]);
+  }, [filter, pageSize]);
 
   const handleFilter = (f: "all" | ProjectCategory) => {
     setFilter(f);
@@ -133,6 +153,15 @@ export default function Projects() {
   // Mobile filters (excludes "All")
   const mobileFilters = projectFilters.filter(f => f !== "all");
 
+  // Determine grid columns based on page size
+  const getGridCols = () => {
+    if (pageSize === 6) {
+      return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+    } else {
+      return "grid-cols-1 md:grid-cols-2";
+    }
+  };
+
   return (
     <section className="py-6 md:py-10">
       <div className="wrap">
@@ -224,12 +253,12 @@ export default function Projects() {
             <div className="hidden md:block">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={`${filter}-${page}`}
+                  key={`${filter}-${page}-${pageSize}`}
                   variants={gridVariants}
                   initial="hidden"
                   animate="visible"
                   exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                  className="grid grid-cols-2 gap-3"
+                  className={`grid ${getGridCols()} gap-3`}
                 >
                   {paginated.map((p) => (
                     <motion.div key={p.slug} variants={cardVariants}>

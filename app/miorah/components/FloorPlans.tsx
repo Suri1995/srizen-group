@@ -2,6 +2,7 @@
 "use client";
 
 import { forwardRef, useEffect, useState } from "react";
+import Image from "next/image";
 import { Download, X, ZoomIn, Compass, Ruler, Layers } from "lucide-react";
 import { floorPlans } from "../data";
 
@@ -37,7 +38,7 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
   }, [lightbox]);
 
   return (
-    <section id="floor-plans" className="wrap py-24 md:py-32">
+    <section id="floor-plans" className="wrap py-12 md:py-20 border border-b-slate-300 shadow-gray-400">
       <div ref={ref} className="reveal section-head">
         <div className="eyebrow">Floor Plans</div>
         <h2 className="text-navy">Explore Every Level of Your Triplex</h2>
@@ -117,10 +118,12 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
             onClick={() => setLightbox(true)}
             className="relative block w-full cursor-zoom-in bg-[repeating-linear-gradient(45deg,#f8fafc,#f8fafc_10px,#f1f5f9_10px,#f1f5f9_20px)]"
           >
-            <img
+            <Image
               key={activeFloor.image}
               src={activeFloor.image}
               alt={`${type.type} ${activeFloor.name} plan`}
+              width={720}
+              height={400}
               className="mx-auto max-h-[340px] w-full max-w-[720px] object-contain p-4 transition-opacity duration-300 md:max-h-[400px] md:p-6"
             />
           </button>
