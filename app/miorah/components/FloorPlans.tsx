@@ -226,7 +226,7 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
     <section
       id="floor-plans"
       aria-labelledby={headingId}
-      className="wrap py-16 md:py-28 border-b border-navy/10 relative overflow-hidden"
+      className="wrap py-16 md:py-28 border-b border-navy/10 md:border-0 relative overflow-hidden"
     >
       <div className="absolute top-1/4 left-1/2 -z-10 h-96 w-96 -translate-x-1/2 rounded-full bg-cyan/10 blur-[120px] pointer-events-none" />
       <div

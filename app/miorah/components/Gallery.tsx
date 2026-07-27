@@ -73,7 +73,7 @@ export const Gallery = forwardRef<HTMLDivElement>((props, ref) => {
   const num = (n: number) => String(n + 1).padStart(2, "0");
 
   return (
-    <section id="gallery" className="wrap py-12 md:py-20 border border-b border-b-emerald-200">
+    <section id="gallery" className="wrap py-12 md:py-20 border border-b border-b-emerald-200 md:border-0">
       <style>{`
         @keyframes miorahFade {
           from { opacity: 0; }

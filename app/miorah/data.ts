@@ -82,14 +82,14 @@ export const amenities = [
   { icon: Flower, label: "TRELLIS" },
   { icon: Sprout, label: "SANDPIT" },
   { icon: Flower2, label: "BUTTERFLY GARDEN" },
-  
+
   // Deck & Pergola (5)
   { icon: Sofa, label: "DECK WITH PERGOLA" },
   { icon: Sun, label: "DECK WITH SEATING PERGOLA" },
   { icon: Sun, label: "BARBEQUE DECK WITH PERGOLA" },
   { icon: Ship, label: "FLOATING DECK WITH PERGOLA" },
   { icon: Milestone, label: "WOODEN BRIDGE WITH PERGOLA" },
-  
+
   // Seating & Relaxation (7)
   { icon: Armchair, label: "SEATING WITH GRAVEL BED" },
   { icon: Sofa, label: "SEATING" },
@@ -98,7 +98,7 @@ export const amenities = [
   { icon: TreePine, label: "SEATING WITH SPECIMEN PLANTATION" },
   { icon: Sparkles, label: "YOUNGER SEATING PLAZA" },
   { icon: Armchair, label: "SENIOR CITIZEN SEATING PLAZA WITH PERGOLA" },
-  
+
   // Sports & Fitness (7)
   { icon: Trophy, label: "MULTIPURPOSE COURT" },
   { icon: Trophy, label: "1.BADMINTION COURT" },
@@ -107,7 +107,7 @@ export const amenities = [
   { icon: CircleDot, label: "BASKET BALL COURT WITH PICKLE BALL COURT" },
   { icon: Snowflake, label: "SKATING RINK" },
   { icon: Dumbbell, label: "OUT DOOR GYM" },
-  
+
   // Water & Pool (7)
   { icon: Waves, label: "MAIN SWIMMING POOL" },
   { icon: Baby, label: "KIDS SWIMMING POOL" },
@@ -116,19 +116,19 @@ export const amenities = [
   { icon: Waves, label: "POOL DECK" },
   { icon: Droplet, label: "SHOWER" },
   { icon: Home, label: "CHANGING ROOMS" },
-  
+
   // Social & Events (4)
   { icon: Users, label: "MINI GATHERING AREA" },
   { icon: Users, label: "OAT (OPEN AMPHITHEATER)" },
   { icon: Music2, label: "STAGE" },
   { icon: TreePine, label: "MEDITATION AREA WITH PARTY LAWN" },
-  
+
   // Wellness (1)
   { icon: Footprints, label: "OUT DOOR YOGA AREA" },
-  
+
   // Play & Kids (1)
   { icon: Sparkles, label: "KIDS PLAY AREA" },
-  
+
   // Other (4)
   { icon: Gem, label: "SCREEN WALL WITH SCULPTURE" },
   { icon: Palette, label: "SCULPTURE WITH GRAVEL BED" },
@@ -452,93 +452,145 @@ export const galleryCategories = [
   "Exteriors",
   "Clubhouse",
   "Amenities",
-  "Interiors",
-  "Construction",
 ] as const;
- 
+
 export const galleryImages = [
   {
     category: "Exteriors",
-    src: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&auto=format&fit=crop&q=80",
-    alt: "Aerial view of MIORAH villa community",
+    src: "/gallery/avenue.png",
+    alt: "Tree-lined avenue running through the MIORAH villa community",
     span: "col-span-2 row-span-2",
   },
   {
     category: "Exteriors",
-    src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&auto=format&fit=crop&q=80",
-    alt: "MIORAH main entrance gate",
+    src: "/gallery/east-street-view.png",
+    alt: "East-facing street view of MIORAH villas",
     span: "col-span-1 row-span-1",
   },
   {
     category: "Exteriors",
-    src: "https://images.unsplash.com/photo-1706808849780-7a04fbac83ef?w=1200&auto=format&fit=crop&q=80",
-    alt: "Row of triplex villa facades",
+    src: "/gallery/aerial-view.png",
+    alt: "Aerial view of the MIORAH villa community",
     span: "col-span-1 row-span-2",
   },
   {
+    category: "Exteriors",
+    src: "/gallery/east-facing-villa.png",
+    alt: "East facing triplex villa facade",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Exteriors",
+    src: "/gallery/west-facing-villa.png",
+    alt: "West facing triplex villa facade",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Exteriors",
+    src: "/gallery/west-facing-villas-wide-angle.png",
+    alt: "Wide angle view of west facing villas",
+    span: "col-span-2 row-span-1",
+  },
+  {
+    category: "Exteriors",
+    src: "/gallery/east-facing-villa-wide-angle.png",
+    alt: "Wide angle view of east facing villas",
+    span: "col-span-2 row-span-1",
+  },
+  {
     category: "Clubhouse",
-    src: "https://images.unsplash.com/photo-1759038086701-234d7c43c227?w=1600&auto=format&fit=crop&q=80",
+    src: "/gallery/clubhouse-exterior.png",
+    alt: "MIORAH clubhouse exterior",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    category: "Clubhouse",
+    src: "/gallery/clubhouse-lounge.png",
     alt: "Clubhouse lounge interior",
-    span: "col-span-2 row-span-1",
-  },
-  {
-    category: "Amenities",
-    src: "https://images.unsplash.com/photo-1781255276587-2470a25ea4ba?w=1200&auto=format&fit=crop&q=80",
-    alt: "Swimming pool deck",
     span: "col-span-1 row-span-1",
   },
   {
     category: "Amenities",
-    src: "https://images.unsplash.com/photo-1723823932575-c36ea477f48e?w=1200&auto=format&fit=crop&q=80",
-    alt: "Kids play area",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    category: "Exteriors",
-    src: "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=1600&auto=format&fit=crop&q=80",
-    alt: "Landscaped garden walkway",
-    span: "col-span-2 row-span-2",
-  },
-  {
-    category: "Interiors",
-    src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&auto=format&fit=crop&q=80",
-    alt: "Villa living room interior",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    category: "Interiors",
-    src: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=1200&auto=format&fit=crop&q=80",
-    alt: "Master bedroom interior",
-    span: "col-span-1 row-span-2",
-  },
-  {
-    category: "Interiors",
-    src: "https://images.unsplash.com/photo-1626683164688-9ea28b9276c6?w=1600&auto=format&fit=crop&q=80",
-    alt: "Private home theatre room",
-    span: "col-span-2 row-span-1",
-  },
-  {
-    category: "Amenities",
-    src: "https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=1200&auto=format&fit=crop&q=80",
-    alt: "Outdoor gym and fitness deck",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    category: "Construction",
-    src: "https://images.unsplash.com/photo-1724113595861-93b16bc264a5?w=1200&auto=format&fit=crop&q=80",
-    alt: "Construction progress at the MIORAH site",
+    src: "/gallery/indoor-gym.png",
+    alt: "Indoor gym at the clubhouse",
     span: "col-span-1 row-span-1",
   },
   {
     category: "Clubhouse",
-    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&auto=format&fit=crop&q=80",
-    alt: "Amphitheatre and party lawn",
+    src: "/gallery/indoor-games-room.png",
+    alt: "Indoor games room",
+    span: "col-span-1 row-span-2",
+  },
+  {
+    category: "Clubhouse",
+    src: "/gallery/banquet-hall.png",
+    alt: "Banquet hall for events and gatherings",
     span: "col-span-2 row-span-1",
   },
   {
-    category: "Exteriors",
-    src: "https://images.unsplash.com/photo-1759372945658-1e9f56e751bd?w=1600&auto=format&fit=crop&q=80",
-    alt: "MIORAH villas at night",
+    category: "Amenities",
+    src: "/gallery/kids-play-area-indoor.png",
+    alt: "Indoor kids play area",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/pool-area.png",
+    alt: "Main swimming pool area",
     span: "col-span-2 row-span-2",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/pool-area-02.png",
+    alt: "Swimming pool deck, alternate view",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/multipurpose-court.png",
+    alt: "Multipurpose sports court",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/multipurpose-court-02.png",
+    alt: "Multipurpose sports court, alternate view",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/skating-rink.png",
+    alt: "Skating rink",
+    span: "col-span-2 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/yoga-deck.png",
+    alt: "Outdoor yoga and meditation deck",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/senior-citizen-sitout.png",
+    alt: "Senior citizen seating plaza with pergola",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Clubhouse",
+    src: "/gallery/open-amphitheatre.png",
+    alt: "Open amphitheatre and stage area",
+    span: "col-span-2 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/kids-play-area-outdoor.png",
+    alt: "Outdoor kids play area",
+    span: "col-span-1 row-span-1",
+  },
+  {
+    category: "Amenities",
+    src: "/gallery/outdoor-gym.png",
+    alt: "Outdoor gym",
+    span: "col-span-1 row-span-1",
   },
 ] as const;
