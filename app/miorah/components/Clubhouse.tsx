@@ -78,7 +78,7 @@ export const Clubhouse = forwardRef<HTMLDivElement>((props, ref) => {
 
               <div className="group relative overflow-hidden rounded-2xl border border-white/10">
                 <img
-                  src="/images/clubhouse.png"
+                  src="/gallery/club-house.webp"
                   alt="MIORAH clubhouse and pool deck"
                   className="h-[420px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] md:h-[520px]"
                 />

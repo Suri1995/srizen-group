@@ -2,7 +2,7 @@
 "use client";
 
 import { forwardRef, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Expand, X } from "lucide-react";
 import { galleryImages, galleryCategories } from "../data";
 
 export const Gallery = forwardRef<HTMLDivElement>((props, ref) => {
@@ -119,84 +119,129 @@ export const Gallery = forwardRef<HTMLDivElement>((props, ref) => {
             ))}
           </div>
         </div>
-</div>
-
-      {/* Cinematic main viewer — sized off the viewport so it's always fully visible */}
-      <div
-        className="miorah-frame relative mx-auto overflow-hidden rounded-[28px] bg-[#00072e]"
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        <div className="relative h-[52vh] min-h-[360px] max-h-[560px] w-full sm:h-[60vh] sm:max-h-[640px] md:h-[72vh] md:max-h-[760px]">
-          <img
-            key={active.src}
-            src={active.src}
-            alt={active.alt}
-            className="h-full w-full object-cover"
-          />
-
-          {/* Top scrim — fully masks any baked-in corner label on placeholder art */}
-          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#00072e]/80 to-transparent md:h-28" />
-
-          {/* Bottom scrim — solid + blurred, not a thin gradient, so caption is always legible */}
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#00072e] via-[#00072e]/85 to-transparent md:h-44" />
-
-          {/* Caption bar */}
-          <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 rounded-b-[28px] bg-[#00072e]/70 p-5 backdrop-blur-md md:p-9">
-            <div className="min-w-0">
-              <div className="font-mono text-[11px] uppercase tracking-[.25em] text-cyan">
-                {active.category}
-              </div>
-              <p className="mt-2 max-w-md truncate text-base font-medium text-white md:text-xl">
-                {active.alt}
-              </p>
-            </div>
-            {/* <button
-              onClick={() => setLightbox(true)}
-              aria-label="Expand image"
-              className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-cyan hover:text-cyan md:h-12 md:w-12"
-            >
-              <Expand className="h-5 w-5" />
-            </button> */}
-          </div>
-
-          {/* Desktop arrows */}
-          <button
-            onClick={() => go(-1)}
-            aria-label="Previous"
-            className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#00072e]/40 text-white/80 backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan md:flex"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            onClick={() => go(1)}
-            aria-label="Next"
-            className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#00072e]/40 text-white/80 backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan md:flex"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
       </div>
 
-      {/* Filmstrip */}
-      <div className="mt-5 flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        {filtered.map((img, i) => (
-          <button
-            key={img.src}
-            ref={(el) => {
-              thumbRefs.current[i] = el;
-            }}
-            onClick={() => setIndex(i)}
-            aria-label={`View ${img.alt}`}
-            className={`relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-xl transition-all duration-300 md:h-24 md:w-32 ${
-              i === index
-                ? "opacity-100 ring-2 ring-cyan ring-offset-2 ring-offset-white"
-                : "opacity-45 hover:opacity-80"
-            }`}
-          >
-            <img src={img.src} alt="" className="h-full w-full object-cover" />
-          </button>
-        ))}
+      {/* Side-by-side layout: main viewer + vertical filmstrip on desktop, stacked on mobile */}
+      <div className="flex flex-col gap-5 md:flex-row md:items-stretch">
+        {/* Cinematic main viewer */}
+        <div
+          className="miorah-frame relative flex-1 overflow-hidden rounded-[28px] bg-[#00072e] md:min-w-0"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          <div className="relative h-[52vh] min-h-[360px] max-h-[560px] w-full sm:h-[60vh] sm:max-h-[640px] md:h-[72vh] md:max-h-[760px]">
+            <img
+              key={active.src}
+              src={active.src}
+              alt={active.alt}
+              className="h-full w-full object-cover"
+            />
+
+            {/* Top scrim — fully masks any baked-in corner label on placeholder art */}
+            <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#00072e]/80 to-transparent md:h-28" />
+
+            {/* Bottom scrim — solid + blurred, not a thin gradient, so caption is always legible */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#00072e] via-[#00072e]/85 to-transparent md:h-44" />
+
+            {/* Caption bar */}
+            <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 rounded-b-[28px] bg-[#00072e]/70 p-5 backdrop-blur-md md:p-6">
+              <div className="min-w-0">
+                <div className="font-mono text-[11px] uppercase tracking-[.25em] text-cyan">
+                  {active.category}
+                </div>
+                <p className="mt-2 max-w-md truncate text-base font-medium text-white md:text-xl">
+                  {active.alt}
+                </p>
+              </div>
+              {/* <button
+                onClick={() => setLightbox(true)}
+                aria-label="Expand image"
+                className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-cyan hover:text-cyan md:h-12 md:w-12"
+              >
+                <Expand className="h-5 w-5" />
+              </button> */}
+            </div>
+
+            {/* Desktop arrows */}
+            <button
+              onClick={() => go(-1)}
+              aria-label="Previous"
+              className="absolute left-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#00072e]/40 text-white/80 backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan md:flex"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={() => go(1)}
+              aria-label="Next"
+              className="absolute right-4 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#00072e]/40 text-white/80 backdrop-blur-sm transition-colors hover:border-cyan hover:text-cyan md:flex"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Filmstrip — horizontal row on mobile, vertical column beside the viewer on desktop */}
+        <div className="relative flex-shrink-0 md:w-32">
+          {/* Mobile: horizontal scroller */}
+          <div className="flex gap-3 overflow-x-auto pb-2 md:hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {filtered.map((img, i) => (
+              <button
+                key={img.src}
+                ref={(el) => {
+                  thumbRefs.current[i] = el;
+                }}
+                onClick={() => setIndex(i)}
+                aria-label={`View ${img.alt}`}
+                className={`relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-xl transition-all duration-300 ${
+                  i === index
+                    ? "opacity-100 ring-2 ring-cyan ring-offset-2 ring-offset-white"
+                    : "opacity-45 hover:opacity-80"
+                }`}
+              >
+                <img src={img.src} alt="" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+
+          {/* Desktop: vertical scroller, height-matched to the main viewer */}
+          <div className="hidden h-[72vh] max-h-[760px] flex-col md:flex">
+            <button
+              onClick={() => go(-1)}
+              aria-label="Previous thumbnail"
+              className="mb-2 flex h-8 w-full flex-shrink-0 items-center justify-center rounded-lg border border-navy/10 text-navy/50 transition-colors hover:border-cyan hover:text-cyan"
+            >
+              <ChevronUp className="h-4 w-4" />
+            </button>
+
+            <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto py-1 pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              {filtered.map((img, i) => (
+                <button
+                  key={img.src}
+                  ref={(el) => {
+                    thumbRefs.current[i] = el;
+                  }}
+                  onClick={() => setIndex(i)}
+                  aria-label={`View ${img.alt}`}
+                  className={`relative h-24 w-full flex-shrink-0 overflow-hidden rounded-xl transition-all duration-300 ${
+                    i === index
+                      ? "opacity-100 "
+                      : "opacity-15 hover:opacity-70"
+                  }`}
+                >
+                  <img src={img.src} alt="" className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => go(1)}
+              aria-label="Next thumbnail"
+              className="mt-2 flex h-8 w-full flex-shrink-0 items-center justify-center rounded-lg border border-navy/10 text-navy/50 transition-colors hover:border-cyan hover:text-cyan"
+            >
+              <ChevronDown className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Lightbox */}

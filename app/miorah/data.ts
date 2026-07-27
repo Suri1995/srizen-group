@@ -517,7 +517,7 @@ export const galleryImages = [
   },
   {
     category: "Clubhouse",
-    src: "/gallery/indoor-games-room.webp",
+    src: "/gallery/club-house.webp",
     alt: "Indoor games room",
     span: "col-span-1 row-span-2",
   },

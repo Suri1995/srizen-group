@@ -105,7 +105,7 @@ const getCategories = () => {
   return ["All", ...Array.from(new Set(categories))];
 };
 
-const ITEMS_PER_PAGE = 8; // 4 columns x 2 rows
+const ITEMS_PER_PAGE = 12;
 
 export const Amenities = forwardRef<HTMLDivElement>((props, ref) => {
   const [activeCategory, setActiveCategory] = useState<string>("All");
