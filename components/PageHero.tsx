@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ChevronRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 interface PageHeroProps {
   eyebrow: string;
@@ -28,6 +29,11 @@ export default function PageHero({
     { value: "26", label: "Cities" },
   ],
 }: PageHeroProps) {
+  // Ensure page scrolls to top when hero mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   const titleParts = title.split("of");
 
   // Animation variants

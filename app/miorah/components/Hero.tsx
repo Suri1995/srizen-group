@@ -1,12 +1,21 @@
 "use client";
 
-import { forwardRef } from "react";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { forwardRef, useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Stat } from "./Helpers";
 
 export const Hero = forwardRef<HTMLDivElement>((props, ref) => {
+  useEffect(() => {
+    // Ensure hero is visible and page scrolls to top
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-[#00072e]">
+    <section 
+      ref={ref} 
+      className="relative w-full overflow-hidden bg-[#00072e] min-h-screen"
+      id="miorah-hero"
+    >
       {/* background image with slow ken-burns zoom */}
       <div className="absolute inset-0 overflow-hidden">
         <img
@@ -68,7 +77,6 @@ export const Hero = forwardRef<HTMLDivElement>((props, ref) => {
         </div>
       </div>
 
-
       {/* scroll cue */}
       <div className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 md:flex flex-col items-center gap-2">
         <span className="text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Scroll</span>
@@ -77,7 +85,7 @@ export const Hero = forwardRef<HTMLDivElement>((props, ref) => {
         </span>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes kenburns {
           from {
             transform: scale(1.08) translate(0, 0);

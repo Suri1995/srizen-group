@@ -506,7 +506,5 @@ export const openRoles: OpenRole[] = [
 ];
 
 export const officeLocations: OfficeLocation[] = [
-  { city: "Hyderabad (HQ)", address: "SriZen Towers, HITEC City, Telangana 500081", phone: "+91 40 4567 8900" },
-  { city: "Mumbai", address: "Level 12, BKC Business Hub, Bandra East, Mumbai 400051", phone: "+91 22 4890 2200" },
-  { city: "Bengaluru", address: "Prestige Tech Park, Outer Ring Road, Bengaluru 560103", phone: "+91 80 3456 7100" },
+  { city: "Hyderabad (HQ)", address: "SriZen Towers, HITEC City, Telangana 500081", phone: "+917012345555" },
 ];

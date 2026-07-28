@@ -15,14 +15,12 @@ const footerGroups: FooterColProps[] = [
       ["Services", "/services"],
       ["Projects", "/projects"],
       ["Industries", "/industries"],
-      ["Careers", "/careers"],
     ],
   },
   {
     title: "Company",
     links: [
-      ["Sustainability", "/sustainability"],
-      ["News & Insights", "/news"],
+      ["Miorah", "/miorah"],
       ["Contact", "/contact"],
     ],
   },
@@ -30,7 +28,7 @@ const footerGroups: FooterColProps[] = [
     title: "Contact",
     links: [
       ["HITEC City, Hyderabad", "/contact"],
-      ["+91 40 4567 8900", "tel:+914045678900"],
+      ["+917012345555 / +917012346666", "tel:+917012345555"],
       ["info@srizengroup.com", "mailto:info@srizengroup.com"],
     ],
   },
@@ -104,21 +102,76 @@ export default function Footer() {
 function LinkList({ links, withIcons }: { links: FooterColProps["links"]; withIcons?: boolean }) {
   return (
     <ul className="flex flex-col gap-3.5">
-      {links.map(([label, href], i) => (
-        <li key={label}>
-          <Link
-            href={href}
-            className="group flex items-start gap-2.5 text-[14.5px] text-white/70 transition-colors hover:text-cyan"
-          >
-            {withIcons && (
-              <span className="mt-0.5 shrink-0 text-white/35 transition-colors group-hover:text-cyan">
-                {contactIcons[i]}
-              </span>
-            )}
-            <span>{label}</span>
-          </Link>
-        </li>
-      ))}
+      {links.map(([label, href], i) => {
+        // Check if this is the Miorah link
+        const isMiorah = label === "Miorah" && href === "/miorah";
+        
+        // Check if this is the phone number entry with both numbers
+        const isPhoneWithBoth = label.includes(' / ') && href.startsWith('tel:');
+        
+        if (isMiorah) {
+          return (
+            <li key={label}>
+              <Link href={href} className="flex items-center gap-2.5 text-[14.5px] text-white/70">
+                <Image
+                  src="/assets/miorah.png"
+                  alt="Miorah"
+                  width={120}
+                  height={50}
+                  className="w-24 h-10 object-contain"
+                />
+              </Link>
+            </li>
+          );
+        }
+        
+        if (isPhoneWithBoth) {
+          // Split the label to get both numbers
+          const [firstNumber, secondNumber] = label.split(' / ');
+          
+          return (
+            <li key={label}>
+              <div className="flex items-start gap-2.5 text-[14.5px] text-white/70">
+                {withIcons && (
+                  <span className="mt-0.5 shrink-0 text-white/35">
+                    {contactIcons[i]}
+                  </span>
+                )}
+                <span>
+                  <Link 
+                    href="tel:+917012345555" 
+                    className="hover:text-cyan transition-colors"
+                  >
+                    {firstNumber}
+                  </Link>
+                  <span className="text-white/30 mx-1">/</span>
+                  <Link 
+                    href="tel:+917012346666" 
+                    className="hover:text-cyan transition-colors"
+                  >
+                    {secondNumber}
+                  </Link>
+                </span>
+              </div>
+            </li>
+          );
+        }
+        
+        return (
+          <li key={label}>
+            <div className="flex items-start gap-2.5 text-[14.5px] text-white/70">
+              {withIcons && (
+                <span className="mt-0.5 shrink-0 text-white/35">
+                  {contactIcons[i]}
+                </span>
+              )}
+              <Link href={href} className="hover:text-cyan transition-colors">
+                {label}
+              </Link>
+            </div>
+          </li>
+        );
+      })}
     </ul>
   );
 }

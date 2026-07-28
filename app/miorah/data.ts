@@ -458,31 +458,31 @@ export const galleryImages = [
   {
     category: "Exteriors",
     src: "/gallery/avenue.webp",
-    alt: "Tree-lined avenue running through the MIORAH villa community",
+    alt: "Tree-lined avenue running through MIORAH",
     span: "col-span-2 row-span-2",
   },
   {
     category: "Exteriors",
     src: "/gallery/east-street-view.webp",
-    alt: "East-facing street view of MIORAH villas",
+    alt: "East-facing street view of MIORAH",
     span: "col-span-1 row-span-1",
   },
   {
     category: "Exteriors",
     src: "/gallery/aerial-view.webp",
-    alt: "Aerial view of the MIORAH villa community",
+    alt: "West-facing street view of MIORAH",
     span: "col-span-1 row-span-2",
   },
   {
     category: "Exteriors",
     src: "/gallery/east-facing-villa.webp",
-    alt: "East facing triplex villa facade",
+    alt: "Front View of East facing triplex villa",
     span: "col-span-1 row-span-1",
   },
   {
     category: "Exteriors",
     src: "/gallery/west-facing-villa.webp",
-    alt: "West facing triplex villa facade",
+    alt: "Front View of West facing triplex villa",
     span: "col-span-1 row-span-1",
   },
   {
@@ -498,9 +498,9 @@ export const galleryImages = [
     span: "col-span-2 row-span-1",
   },
   {
-    category: "Clubhouse",
+    category: "Exteriors",
     src: "/gallery/clubhouse-exterior.webp",
-    alt: "MIORAH clubhouse exterior",
+    alt: "Top View of Miorah Street",
     span: "col-span-2 row-span-2",
   },
   {

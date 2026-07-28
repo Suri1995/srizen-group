@@ -21,7 +21,7 @@ const rows: ContactRow[] = [
   },
   {
     label: "Phone",
-    value: "+91 40 4567 8900",
+    value: "+917012345555 || +917012346666",
     icon: (
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z" />
     ),
@@ -321,7 +321,7 @@ export default function Contact() {
     errors[field] ? "border-red-500 focus:border-red-500" : "border-navy/15 hover:border-navy/30 focus:border-navy";
 
   return (
-    <section className="py-20 md:py-28">
+    <section id="contact-section" className="py-20 md:py-28">
       <div className="wrap grid md:grid-cols-[0.9fr_1.1fr] gap-16 md:gap-24">
         <div ref={ref} data-in={inView} className="reveal">
           <p className="eyebrow">Get In Touch</p>

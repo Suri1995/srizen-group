@@ -1,6 +1,6 @@
-// app/projects/miorah/page.tsx
 "use client";
 
+import { useEffect } from "react";
 import { useReveal } from "./hooks/useReveal";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -22,6 +22,28 @@ export default function MiorahPage() {
   const clubRef = useReveal<HTMLDivElement>();
   const locRef = useReveal<HTMLDivElement>();
   const amenRef = useReveal<HTMLDivElement>();
+
+  useEffect(() => {
+    // Clear any hash from URL
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+    
+    // Multiple scroll attempts to ensure it works
+    window.scrollTo(0, 0);
+    
+    // Use requestAnimationFrame for next frame
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+    
+    // Also scroll after a tiny delay for safety
+    const timeout = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 50);
+    
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <main className="bg-white">

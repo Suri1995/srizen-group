@@ -1,14 +1,14 @@
-// app/projects/miorah/components/Gallery.tsx
 "use client";
 
 import { forwardRef, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Expand, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, X } from "lucide-react";
 import { galleryImages, galleryCategories } from "../data";
 
 export const Gallery = forwardRef<HTMLDivElement>((props, ref) => {
   const [filter, setFilter] = useState<(typeof galleryCategories)[number]>("All");
   const [index, setIndex] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -18,28 +18,34 @@ export const Gallery = forwardRef<HTMLDivElement>((props, ref) => {
     filter === "All" ? galleryImages : galleryImages.filter((g) => g.category === filter);
   const active = filtered[index] ?? filtered[0];
 
+  // Set mounted state after initial render
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // Reset position when the filter changes
   useEffect(() => setIndex(0), [filter]);
 
-  // Keep the active thumbnail in view as index changes
+  // Only scroll thumbnails into view after mount and user interaction
   useEffect(() => {
+    if (!isMounted) return; // Skip on initial mount
     thumbRefs.current[index]?.scrollIntoView({
       behavior: "smooth",
       inline: "center",
       block: "nearest",
     });
-  }, [index]);
+  }, [index, isMounted]);
 
-  // Bring the clicked category tab into view — so tapping a tab near the
-  // edge scrolls it (and its neighbor) fully into frame, instead of leaving
-  // it half-cut-off
+  // Bring the clicked category tab into view
   const selectCategory = (c: (typeof galleryCategories)[number], i: number) => {
     setFilter(c);
-    tabRefs.current[i]?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+    if (isMounted) {
+      tabRefs.current[i]?.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
   };
 
   const go = (dir: 1 | -1) =>
@@ -153,13 +159,6 @@ export const Gallery = forwardRef<HTMLDivElement>((props, ref) => {
                   {active.alt}
                 </p>
               </div>
-              {/* <button
-                onClick={() => setLightbox(true)}
-                aria-label="Expand image"
-                className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-cyan hover:text-cyan md:h-12 md:w-12"
-              >
-                <Expand className="h-5 w-5" />
-              </button> */}
             </div>
 
             {/* Desktop arrows */}

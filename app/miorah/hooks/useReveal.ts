@@ -1,4 +1,3 @@
-// app/projects/miorah/hooks/useReveal.ts
 import { useEffect, useRef } from "react";
 
 export function useReveal<T extends HTMLElement>() {
