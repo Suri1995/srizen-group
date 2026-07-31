@@ -9,6 +9,12 @@ import { projects, projectFilters, type ProjectCategory } from "@/data/content";
 const PAGE_SIZE = 4;
 
 export default function Projects() {
+  // projectFilters is now derived from the actual project data (see content.ts).
+  // When there's only one category in play, filtering UI is pointless — hide it
+  // and give the grid the full width instead of a 70/30 split.
+  const hasMultipleCategories = projectFilters.length > 1;
+  const onlyCategory = !hasMultipleCategories ? projectFilters[0] : undefined;
+
   const [filter, setFilter] = useState<"all" | ProjectCategory>("all");
   const [page, setPage] = useState(1);
   const [mobileSlide, setMobileSlide] = useState(0);
@@ -18,8 +24,10 @@ export default function Projects() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [pageSize, setPageSize] = useState(PAGE_SIZE);
 
-  const filtered = projects.filter((p) => filter === "all" || p.cat === filter);
-  
+  const filtered = hasMultipleCategories
+    ? projects.filter((p) => filter === "all" || p.cat === filter)
+    : projects;
+
   // Adjust page size based on screen width
   useEffect(() => {
     const updatePageSize = () => {
@@ -34,8 +42,8 @@ export default function Projects() {
     };
 
     updatePageSize();
-    window.addEventListener('resize', updatePageSize);
-    return () => window.removeEventListener('resize', updatePageSize);
+    window.addEventListener("resize", updatePageSize);
+    return () => window.removeEventListener("resize", updatePageSize);
   }, []);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
@@ -147,108 +155,118 @@ export default function Projects() {
     }),
   };
 
-  // Desktop filters (includes "All")
+  // Desktop filters (includes "All") — only meaningful with 2+ categories
   const desktopFilters = projectFilters;
-  
-  // Mobile filters (excludes "All")
-  const mobileFilters = projectFilters.filter(f => f !== "all");
 
-  // Determine grid columns based on page size
+  // Mobile filters (excludes "All")
+  const mobileFilters = projectFilters.filter((f) => f !== "all");
+
+  // Determine grid columns based on page size / whether the sidebar is present
   const getGridCols = () => {
+    if (!hasMultipleCategories) {
+      // Full-width grid, no sidebar competing for space
+      return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+    }
     if (pageSize === 6) {
       return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
-    } else {
-      return "grid-cols-1 md:grid-cols-2";
     }
+    return "grid-cols-1 md:grid-cols-2";
   };
+
+  const headerLabel = hasMultipleCategories
+    ? `${filtered.length} Projects`
+    : `${filtered.length} ${onlyCategory ? capitalize(onlyCategory) : ""} Project${
+        filtered.length === 1 ? "" : "s"
+      }`;
 
   return (
     <section className="py-6 md:py-10">
       <div className="wrap">
         {/* Header */}
         <div className="mb-5 flex items-center justify-between">
-          <p className="text-2xl font-display font-semibold text-navy !mb-0">
-            {filtered.length} Projects
-          </p>
+          <p className="text-2xl font-display font-semibold text-navy !mb-0">{headerLabel}</p>
           {/* Mobile slide indicator */}
-          <div className="md:hidden flex items-center gap-1.5">
-            {mobileSlides.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => goToMobileSlide(idx)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  idx === mobileSlide
-                    ? "w-6 bg-navy"
-                    : "w-1.5 bg-navy/20 hover:bg-navy/40"
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </div>
+          {mobileSlides.length > 1 && (
+            <div className="md:hidden flex items-center gap-1.5">
+              {mobileSlides.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => goToMobileSlide(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    idx === mobileSlide ? "w-6 bg-navy" : "w-1.5 bg-navy/20 hover:bg-navy/40"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Two-column layout */}
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-          {/* Left sidebar - Filters (30%) */}
-          <aside className="md:w-[30%] flex-shrink-0">
-            <div className="sticky top-24">
-              <h3 className="text-[11px] font-semibold text-ink-muted uppercase tracking-wider mb-3">
-                Categories
-              </h3>
-              
-              {/* Desktop Filters - includes "All" */}
-              <div className="hidden md:flex flex-col gap-1" role="group">
-                {desktopFilters.map((f) => {
-                  const active = filter === f;
-                  return (
-                    <button
-                      key={f}
-                      onClick={() => handleFilter(f)}
-                      aria-pressed={active}
-                      className={`px-3.5 py-1.5 rounded-md border text-[11.5px] font-medium capitalize transition-all duration-300 ease-premium text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 ${
-                        active
-                          ? "bg-navy text-white border-navy"
-                          : "text-ink-muted border-navy/15 hover:bg-navy/5 hover:border-navy/30"
-                      }`}
-                    >
-                      {f}
-                    </button>
-                  );
-                })}
-              </div>
+        {/* Layout: sidebar + grid when there's more than one category, otherwise full-width grid */}
+        <div className={`flex flex-col ${hasMultipleCategories ? "md:flex-row gap-6 md:gap-8" : ""}`}>
+          {hasMultipleCategories && (
+            <aside className="md:w-[30%] flex-shrink-0">
+              <div className="sticky top-24">
+                <h3 className="text-[11px] font-semibold text-ink-muted uppercase tracking-wider mb-3">
+                  Categories
+                </h3>
 
-              {/* Mobile Filters - excludes "All" */}
-              <div className="flex md:hidden flex-wrap gap-1.5" role="group">
-                {mobileFilters.map((f) => {
-                  const active = filter === f;
-                  return (
-                    <button
-                      key={f}
-                      onClick={() => handleFilter(f)}
-                      aria-pressed={active}
-                      className={`px-3.5 py-1.5 rounded-full border text-[11.5px] font-medium capitalize transition-all duration-300 ease-premium text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 ${
-                        active
-                          ? "bg-navy text-white border-navy"
-                          : "text-ink-muted border-navy/15 hover:bg-navy/5 hover:border-navy/30"
-                      }`}
-                    >
-                      {f}
-                    </button>
-                  );
-                })}
-              </div>
-              
-              {/* Filter count - desktop only */}
-              <div className="mt-4 pt-4 border-t border-navy/10 hidden md:block">
-                <p className="text-[11px] text-ink-muted/60">
-                  Showing {paginated.length} of {filtered.length} projects
-                </p>
-              </div>
-            </div>
-          </aside>
+                {/* Desktop Filters - includes "All" */}
+                <div className="hidden md:flex flex-col gap-1" role="group">
+                  {desktopFilters.map((f) => {
+                    const active = filter === f;
+                    return (
+                      <button
+                        key={f}
+                        onClick={() => handleFilter(f)}
+                        aria-pressed={active}
+                        className={`px-3.5 py-1.5 rounded-md border text-[11.5px] font-medium capitalize transition-all duration-300 ease-premium text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 ${
+                          active
+                            ? "bg-navy text-white border-navy"
+                            : "text-ink-muted border-navy/15 hover:bg-navy/5 hover:border-navy/30"
+                        }`}
+                      >
+                        {f}
+                      </button>
+                    );
+                  })}
+                </div>
 
-          {/* Right content - Cards (70%) */}
-          <div className="md:w-[70%]">
+                {/* Mobile Filters - excludes "All" */}
+                <div className="flex md:hidden flex-wrap gap-1.5" role="group">
+                  {mobileFilters.map((f) => {
+                    const active = filter === f;
+                    return (
+                      <button
+                        key={f}
+                        onClick={() => handleFilter(f)}
+                        aria-pressed={active}
+                        className={`px-3.5 py-1.5 rounded-full border text-[11.5px] font-medium capitalize transition-all duration-300 ease-premium text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 ${
+                          active
+                            ? "bg-navy text-white border-navy"
+                            : "text-ink-muted border-navy/15 hover:bg-navy/5 hover:border-navy/30"
+                        }`}
+                      >
+                        {f}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Filter count - desktop only, only useful when paginated within a filter */}
+                {totalPages > 1 && (
+                  <div className="mt-4 pt-4 border-t border-navy/10 hidden md:block">
+                    <p className="text-[11px] text-ink-muted/60">
+                      Showing {paginated.length} of {filtered.length} projects
+                    </p>
+                  </div>
+                )}
+              </div>
+            </aside>
+          )}
+
+          {/* Content - Cards */}
+          <div className={hasMultipleCategories ? "md:w-[70%]" : "w-full"}>
             {/* Desktop Grid */}
             <div className="hidden md:block">
               <AnimatePresence mode="wait">
@@ -262,7 +280,7 @@ export default function Projects() {
                 >
                   {paginated.map((p) => (
                     <motion.div key={p.slug} variants={cardVariants}>
-                      <ProjectCard project={p} />
+                      <ProjectCard project={p} showCategoryBadge={hasMultipleCategories} />
                     </motion.div>
                   ))}
                 </motion.div>
@@ -283,7 +301,7 @@ export default function Projects() {
                   >
                     <ChevronLeft className="w-3 h-3" strokeWidth={2} />
                   </button>
-                  
+
                   {Array.from({ length: totalPages }).map((_, i) => {
                     const n = i + 1;
                     const active = n === page;
@@ -303,7 +321,11 @@ export default function Projects() {
                         );
                       }
                       if (n === 2 || n === totalPages - 1) {
-                        return <span key={n} className="w-7 h-7 flex items-center justify-center text-ink-muted/40 text-[10px]">…</span>;
+                        return (
+                          <span key={n} className="w-7 h-7 flex items-center justify-center text-ink-muted/40 text-[10px]">
+                            …
+                          </span>
+                        );
                       }
                       return null;
                     }
@@ -361,7 +383,7 @@ export default function Projects() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.1, duration: 0.4 }}
                           >
-                            <ProjectCard project={p} />
+                            <ProjectCard project={p} showCategoryBadge={hasMultipleCategories} />
                           </motion.div>
                         ))}
                       </motion.div>
@@ -391,7 +413,7 @@ export default function Projects() {
                         <ChevronLeft className="w-4 h-4" />
                         Previous
                       </button>
-                      
+
                       <button
                         onClick={handleNext}
                         disabled={mobileSlide === mobileSlides.length - 1}
@@ -411,22 +433,13 @@ export default function Projects() {
                           key={idx}
                           onClick={() => goToMobileSlide(idx)}
                           className={`h-1.5 rounded-full transition-all duration-500 ${
-                            idx === mobileSlide
-                              ? "w-8 bg-navy"
-                              : "w-1.5 bg-navy/20 hover:bg-navy/40"
+                            idx === mobileSlide ? "w-8 bg-navy" : "w-1.5 bg-navy/20 hover:bg-navy/40"
                           }`}
                           aria-label={`Go to slide ${idx + 1}`}
                         />
                       ))}
                     </div>
                   )}
-
-                  {/* Mobile project count */}
-                  <div className="mt-4 text-center">
-                    <p className="text-[11px] text-ink-muted/60">
-                      Showing {mobileSlides[mobileSlide]?.length || 0} of {filtered.length} projects
-                    </p>
-                  </div>
                 </>
               ) : (
                 <p className="text-center text-ink-muted py-10">No projects match this filter yet.</p>
@@ -439,8 +452,18 @@ export default function Projects() {
   );
 }
 
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 // Project Card Component
-function ProjectCard({ project }: { project: any }) {
+function ProjectCard({
+  project,
+  showCategoryBadge = true,
+}: {
+  project: any;
+  showCategoryBadge?: boolean;
+}) {
   return (
     <Link
       href={`/projects/${project.slug}`}
@@ -457,10 +480,12 @@ function ProjectCard({ project }: { project: any }) {
           />
         </div>
 
-        {/* Category Badge */}
-        <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[10px] font-mono font-semibold uppercase tracking-[0.15em] text-white z-10 shadow-sm">
-          {project.cat}
-        </span>
+        {/* Category Badge — only shown when it disambiguates something (2+ categories present) */}
+        {showCategoryBadge && (
+          <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-[10px] font-mono font-semibold uppercase tracking-[0.15em] text-white z-10 shadow-sm">
+            {project.cat}
+          </span>
+        )}
 
         {/* Info Strip */}
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-deep/95 via-navy-deep/55 to-transparent p-2.5 pt-9 z-10">

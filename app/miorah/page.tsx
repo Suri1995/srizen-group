@@ -49,7 +49,7 @@ export default function MiorahPage() {
     <main className="bg-white">
       <Hero ref={heroRef} />
       <About ref={aboutRef} />
-      <VillaConfig ref={specRef} />
+      {/* <VillaConfig ref={specRef} /> */}
       <FloorPlans ref={plansRef} />
       <Gallery ref={galleryRef} />
       <WhyChoose ref={whyRef} />

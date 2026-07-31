@@ -96,7 +96,7 @@ export const navLinks: NavLink[] = [
   { label: "Miorah", href: "/miorah" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
-  { label: "Industries", href: "/industries" },
+  // { label: "Industries", href: "/industries" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -291,14 +291,20 @@ export const projects: Project[] = [
   },
 ];
 
-export const projectFilters: Array<"all" | ProjectCategory> = [
-  "all",
-  "residential",
-  "commercial",
-  "industrial",
-  "infrastructure",
-  "government",
-];
+// projectFilters is DERIVED from the actual projects above — not hardcoded.
+// This guarantees the filter list can never show a category with zero
+// matching projects. Right now every project is "residential", so this
+// evaluates to just ["residential"] (no "all", since there's nothing else
+// to filter against). The moment a second category is added to `projects`,
+// this automatically becomes ["all", "residential", "<new category>"].
+const usedProjectCategories = Array.from(
+  new Set(projects.map((p) => p.cat))
+) as ProjectCategory[];
+
+export const projectFilters: Array<"all" | ProjectCategory> =
+  usedProjectCategories.length > 1
+    ? ["all", ...usedProjectCategories]
+    : usedProjectCategories;
 
 export const industries: string[] = [
   "Residential",
