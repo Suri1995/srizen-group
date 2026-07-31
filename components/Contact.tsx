@@ -321,7 +321,7 @@ export default function Contact() {
     errors[field] ? "border-red-500 focus:border-red-500" : "border-navy/15 hover:border-navy/30 focus:border-navy";
 
   return (
-    <section id="contact-section" className="py-20 md:py-28">
+    <section id="contact-section" className="py-10 md:py-20">
       <div className="wrap grid md:grid-cols-[0.9fr_1.1fr] gap-16 md:gap-24">
         <div ref={ref} data-in={inView} className="reveal">
           <p className="eyebrow">Get In Touch</p>

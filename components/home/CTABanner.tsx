@@ -29,9 +29,9 @@ export default function CTABanner() {
           <Link href="/contact" className="btn btn-primary border border-gray-300">
             Get a Quote <span className="arrow">→</span>
           </Link>
-          <Link href="/careers" className="btn btn-ghost">
+          {/* <Link href="/careers" className="btn btn-ghost">
             View Careers
-          </Link>
+          </Link> */}
         </div>
       </div>
     </section>

@@ -16,7 +16,7 @@ export default function Home() {
       <HomeHero />
       <WhoWeAre/>
       <MarqueeStrip />
-      <Stats />
+      {/* <Stats /> */}
       <AboutTeaser />
       <ServicesTeaser />
       <ProjectsCarouselSection />

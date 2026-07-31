@@ -54,7 +54,7 @@ export default function OfficeLocations() {
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.address)}`;
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section className="relative py-10 md:py-20 overflow-hidden">
       {/* Premium background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-bg-light/50 to-white" />
       <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-navy/5 rounded-full blur-3xl" />
