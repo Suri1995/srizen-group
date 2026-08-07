@@ -230,23 +230,27 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
     };
   }, [lightbox, handleKeyDown]);
 
-  // Handle image error - try alternative extension
+  // Handle image error - try alternative extensions
   const handleImageError = useCallback(() => {
     if (!fallbackAttempted) {
       setFallbackAttempted(true);
-      // Try to load the image with a different extension
+      // Try to load the image with different extensions
       const currentSrc = displaySrc;
-      const extensions = ['.jpg', '.jpeg', '.png', '.webp'];
       const lastDotIndex = currentSrc.lastIndexOf('.');
       
       if (lastDotIndex !== -1) {
         const currentExt = currentSrc.substring(lastDotIndex);
         const basePath = currentSrc.substring(0, lastDotIndex);
         
-        // Find the next extension to try
-        const currentExtIndex = extensions.indexOf(currentExt);
-        if (currentExtIndex !== -1 && currentExtIndex < extensions.length - 1) {
-          const newPath = basePath + extensions[currentExtIndex + 1];
+        // Common image extensions to try
+        const extensionsToTry = ['.jpg', '.jpeg', '.png', '.webp'];
+        
+        // Find the next extension to try (skip the current one)
+        const currentExtIndex = extensionsToTry.indexOf(currentExt);
+        
+        // Try all extensions in order, starting from the next one
+        for (let i = currentExtIndex + 1; i < extensionsToTry.length; i++) {
+          const newPath = basePath + extensionsToTry[i];
           console.log(`Trying alternative image: ${newPath}`);
           setDisplaySrc(newPath);
           setImgError(false);
@@ -254,7 +258,23 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
         }
       }
       
-      // If we couldn't find an alternative, try a generic fallback
+      // If we couldn't find an alternative, try without extension
+      const basePath = currentSrc.substring(0, currentSrc.lastIndexOf('.'));
+      if (basePath) {
+        // Try common extensions from the beginning
+        const extensionsToTry = ['.jpg', '.jpeg', '.png', '.webp'];
+        for (const ext of extensionsToTry) {
+          const newPath = basePath + ext;
+          if (newPath !== currentSrc) {
+            console.log(`Trying alternative image: ${newPath}`);
+            setDisplaySrc(newPath);
+            setImgError(false);
+            return;
+          }
+        }
+      }
+      
+      // If all alternatives fail
       setImgError(true);
     } else {
       setImgError(true);
