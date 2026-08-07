@@ -8,7 +8,6 @@ import {
   useCallback,
   useRef,
 } from "react";
-import Image from "next/image";
 import {
   Download,
   X,
@@ -53,10 +52,13 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
   const activeFloor =
     type.floors.find((f) => f.key === floor) ?? type.floors[0];
 
-  const [displaySrc, setDisplaySrc] = useState(activeFloor.image);
+  // Use string type instead of the specific union
+  const [displaySrc, setDisplaySrc] = useState<string>(activeFloor.image);
   const [prevSrc, setPrevSrc] = useState<string | null>(null);
   const [transitioning, setTransitioning] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
+  const [imgError, setImgError] = useState(false);
+  const [fallbackAttempted, setFallbackAttempted] = useState(false);
 
   const villaListRef = useRef<HTMLDivElement>(null);
   const floorBtnRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -68,8 +70,12 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const floorIdx = FLOORS.findIndex((f) => f.key === floor);
-  const sqydsNum = parseFloat(type.sqyds);
-  const sizePct = Math.max(8, Math.round((sqydsNum / MAX_SQYDS) * 100));
+
+  // Reset error states when type or floor changes
+  useEffect(() => {
+    setImgError(false);
+    setFallbackAttempted(false);
+  }, [typeIdx, floor]);
 
   useEffect(() => {
     setFloor("ground");
@@ -82,6 +88,8 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
     setDisplaySrc(activeFloor.image);
     setTransitioning(true);
     setImgLoading(true);
+    setImgError(false);
+    setFallbackAttempted(false);
 
     const raf1 = requestAnimationFrame(() => {
       requestAnimationFrame(() => setTransitioning(false));
@@ -221,6 +229,37 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
       document.body.style.overflow = "";
     };
   }, [lightbox, handleKeyDown]);
+
+  // Handle image error - try alternative extension
+  const handleImageError = useCallback(() => {
+    if (!fallbackAttempted) {
+      setFallbackAttempted(true);
+      // Try to load the image with a different extension
+      const currentSrc = displaySrc;
+      const extensions = ['.jpg', '.jpeg', '.png', '.webp'];
+      const lastDotIndex = currentSrc.lastIndexOf('.');
+      
+      if (lastDotIndex !== -1) {
+        const currentExt = currentSrc.substring(lastDotIndex);
+        const basePath = currentSrc.substring(0, lastDotIndex);
+        
+        // Find the next extension to try
+        const currentExtIndex = extensions.indexOf(currentExt);
+        if (currentExtIndex !== -1 && currentExtIndex < extensions.length - 1) {
+          const newPath = basePath + extensions[currentExtIndex + 1];
+          console.log(`Trying alternative image: ${newPath}`);
+          setDisplaySrc(newPath);
+          setImgError(false);
+          return;
+        }
+      }
+      
+      // If we couldn't find an alternative, try a generic fallback
+      setImgError(true);
+    } else {
+      setImgError(true);
+    }
+  }, [displaySrc, fallbackAttempted]);
 
   return (
     <section
@@ -485,7 +524,6 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
               </div>
 
               <div className="flex items-center gap-2">
-
                 <a
                   href={type.pdf}
                   download
@@ -522,34 +560,44 @@ export const FloorPlans = forwardRef<HTMLDivElement>((props, ref) => {
 
               <div className="relative aspect-[4/3] w-full max-w-[700px] transition-transform ease-out group-hover:scale-[1.015]">
                 {/* Loading skeleton — shows only while the very first plan loads */}
-                {imgLoading && !prevSrc && (
+                {imgLoading && !prevSrc && !imgError && (
                   <div className="absolute inset-2 animate-pulse rounded-lg bg-navy/5" />
                 )}
 
-                {prevSrc && (
-                  <Image
-                    key={`prev-${prevSrc}`}
-                    src={prevSrc}
-                    alt=""
-                    aria-hidden
-                    fill
-                    className={`object-contain p-2 drop-shadow-md transition-opacity duration-500 ease-out ${
-                      transitioning ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
+                {/* Show error state if image fails to load */}
+                {imgError && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 rounded-lg p-4">
+                    <div className="text-center">
+                      <p className="text-gray-500 text-sm font-medium">Floor plan image not available</p>
+                      <p className="text-xs text-gray-400 mt-1">{displaySrc}</p>
+                    </div>
+                  </div>
                 )}
-                <Image
-                  key={`current-${displaySrc}`}
-                  src={displaySrc}
-                  alt={`Architectural floor plan for ${type.type}, ${activeFloor.name}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 768px"
-                  priority
-                  onLoadingComplete={() => setImgLoading(false)}
-                  className={`object-contain p-2 drop-shadow-md transition-opacity duration-500 ease-out ${
-                    transitioning ? "opacity-0" : "opacity-100"
-                  }`}
-                />
+
+                {!imgError && (
+                  <>
+                    {prevSrc && (
+                      <img
+                        key={`prev-${prevSrc}`}
+                        src={prevSrc}
+                        alt=""
+                        className={`absolute inset-0 w-full h-full object-contain p-2 drop-shadow-md transition-opacity duration-500 ease-out ${
+                          transitioning ? "opacity-100" : "opacity-0"
+                        }`}
+                      />
+                    )}
+                    <img
+                      key={`current-${displaySrc}`}
+                      src={displaySrc}
+                      alt={`Architectural floor plan for ${type.type}, ${activeFloor.name}`}
+                      onLoad={() => setImgLoading(false)}
+                      onError={handleImageError}
+                      className={`absolute inset-0 w-full h-full object-contain p-2 drop-shadow-md transition-opacity duration-500 ease-out ${
+                        transitioning ? "opacity-0" : "opacity-100"
+                      }`}
+                    />
+                  </>
+                )}
               </div>
 
               <div className="absolute bottom-4 left-4 flex items-center gap-1.5 rounded-full border border-navy/10 bg-white/90 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-navy/50 backdrop-blur-sm">

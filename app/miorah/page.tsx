@@ -48,10 +48,14 @@ export default function MiorahPage() {
   return (
     <main className="bg-white">
       <Hero ref={heroRef} />
+      <div className="bg-gradient-to-b from-white to-gray-100">
       <About ref={aboutRef} />
+      </div>
       {/* <VillaConfig ref={specRef} /> */}
       <FloorPlans ref={plansRef} />
+      <div className="bg-gray-100">
       <Gallery ref={galleryRef} />
+      </div>
       <WhyChoose ref={whyRef} />
       <Clubhouse ref={clubRef} />
       <Location ref={locRef} />

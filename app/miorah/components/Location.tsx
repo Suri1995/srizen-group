@@ -50,15 +50,26 @@ export const Location = forwardRef<HTMLDivElement>((props, ref) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-white to-secondary/30" />
-      
-      {/* Decorative Elements */}
-      <div className="absolute top-20 right-20 w-72 h-72 bg-cyan-400/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-navy/5 rounded-full blur-3xl" />
-      
+    <section className="relative py-16 md:py-24">
+      {/* Decorative Elements — isolated in their own clipped layer so
+          `overflow-hidden` never sits between the sticky card and the
+          viewport (overflow on an ancestor breaks position: sticky). */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-white to-secondary/30" />
+        <div className="absolute top-20 right-20 w-72 h-72 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-navy/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="wrap relative">
+        {/* NOTE: if the card still doesn't stick after this, check the
+            `reveal` class below in globals.css / your animation lib.
+            If it applies `transform`, `filter`, or `will-change: transform`
+            to this element (even transiently during the intro animation),
+            it creates a new containing block and position:sticky children
+            will stick relative to THIS box instead of the viewport. If
+            that's the case, remove `reveal` from this wrapper, or add a
+            plain inner wrapper for the sticky column that sits outside
+            the animated element. */}
         <div ref={ref} className="reveal">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -68,7 +79,7 @@ export const Location = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
             <h2 className="text-navy text-3xl md:text-5xl font-display font-bold">
               Prime Location,{' '}
-              <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan to-blue-500 bg-clip-text text-transparent">
                 Excellent Connectivity
               </span>
             </h2>
@@ -79,10 +90,10 @@ export const Location = forwardRef<HTMLDivElement>((props, ref) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:items-start">
             {/* Left Side - Address Card */}
-            <div className="lg:col-span-2">
-              <div className="sticky top-24">
+            <div className="lg:col-span-2 lg:self-stretch">
+              <div className="lg:sticky lg:top-24">
                 {/* Main Address Card */}
                 <div className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500" />

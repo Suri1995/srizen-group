@@ -14,7 +14,7 @@ const footerGroups: FooterColProps[] = [
       ["About", "/about"],
       ["Services", "/services"],
       ["Projects", "/projects"],
-      ["Industries", "/industries"],
+      // ["Industries", "/industries"],
     ],
   },
   {

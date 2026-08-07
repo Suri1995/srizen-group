@@ -4,7 +4,7 @@ import { whyChoose } from "../data";
 
 export const WhyChoose = forwardRef<HTMLDivElement>((props, ref) => {
   return (
-    <section className="wrap py-24 md:py-32">
+    <section className="wrap py-10 md:py-20">
       <div ref={ref} className="reveal section-head">
         <div className="eyebrow">Why Choose MIORAH?</div>
         <h2 className="text-navy">A Perfect Address for Families & Investment</h2>

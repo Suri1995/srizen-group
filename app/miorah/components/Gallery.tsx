@@ -224,7 +224,7 @@ export const Gallery = forwardRef<HTMLDivElement>((props, ref) => {
                   className={`relative h-24 w-full flex-shrink-0 overflow-hidden rounded-xl transition-all duration-300 ${
                     i === index
                       ? "opacity-100 "
-                      : "opacity-15 hover:opacity-70"
+                      : "opacity-50 hover:opacity-70"
                   }`}
                 >
                   <img src={img.src} alt="" className="h-full w-full object-cover" />

@@ -1,4 +1,3 @@
-// app/projects/miorah/data.ts
 import {
   Waves,
   Baby,
@@ -71,7 +70,6 @@ export const connectivity = [
   { label: "Hospitals & Retail", note: "Healthcare, shopping & entertainment" },
 ];
 
-// All amenities from your list - 43 total
 export const amenities = [
   // Outdoor & Garden (8)
   { icon: Grid3x3, label: "GRASS PAVERS" },
