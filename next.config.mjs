@@ -11,7 +11,7 @@ const nextConfig = {
     domains: ['localhost', '127.0.0.1'],
   },
   // For static file serving in production
-  output: 'standalone',
+  // // output: 'standalone', // Commented out for Windows compatibility // Commented out for Windows compatibility with pnpm
   // Handle trailing slashes
   trailingSlash: false,
   // Webpack configuration
