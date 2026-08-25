@@ -21,8 +21,8 @@ export default function Home() {
       {/* <ServicesTeaser /> */}
       <ProjectsCarouselSection />
       <WhyChoose />
-      <Testimonials />
-      <Partners />
+      {/* <Testimonials /> */}
+      {/* <Partners /> */}
       <CTABanner />
     </>
   );
