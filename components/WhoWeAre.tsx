@@ -3,7 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const CAPABILITIES = ["Construction", "Infrastructure", "Commercial", "Residential", "Industrial"];
+const CAPABILITIES = ["Construction", "Infrastructure", "Commercial", "Residential"];
 
 // A villa's body + roof + windows, all grouped so the whole thing can grow
 // up from the ground as one unit, then have its windows light up after.
@@ -106,8 +106,8 @@ export default function WhoWeAre() {
             SriZen Group delivers innovative construction, infrastructure,
             commercial, residential, and industrial projects with
             uncompromising quality and precision —{" "}
-            <span className="font-semibold text-navy">240+ projects</span>{" "}
-            across <span className="font-semibold text-navy">26 cities</span>.
+            <span className="font-semibold text-navy">250+ projects</span>{" "}
+            across <span className="font-semibold text-navy">Hyderabad</span>.
           </p>
 
           <ul className="mt-6 flex flex-wrap gap-2.5">
@@ -166,7 +166,7 @@ export default function WhoWeAre() {
               style={{ animationDelay: "900ms" }}
             >
               <p className="font-mono text-[10.5px] uppercase tracking-[.18em] text-cyan">Live Progress</p>
-              <p className="mt-1 text-[13.5px] text-white/80">Turning blueprints into villas.</p>
+              <p className="mt-1 text-[13.5px] text-white/80">Turning blueprints into Living spaces.</p>
             </div>
           </div>
         </div>

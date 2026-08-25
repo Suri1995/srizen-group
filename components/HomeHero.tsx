@@ -7,10 +7,10 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 const STATS = [
-  { value: "240+", label: "Projects Delivered" },
-  { value: "26", label: "Cities" },
+  { value: "250+", label: "Residential Spaces Delivered" },
+  // { value: "26", label: "Cities" },
   { value: "2008", label: "Est." },
-  { value: "17+", label: "Years of Trust" },
+  { value: "18+", label: "Years of Trust" },
 ];
 
 // Static, tiny, no runtime cost — a touch of film-grain so the flat colour
@@ -156,9 +156,7 @@ export default function HomeHero() {
             className="hero-in mt-4 text-sm leading-relaxed text-white/70 sm:mt-5 sm:text-base md:mt-6 md:text-lg"
             style={{ animationDelay: "280ms" }}
           >
-            Est. 2008 &middot; Hyderabad — engineering excellence across
-            construction, infrastructure, commercial, residential and
-            industrial projects, delivered at scale.
+            With over 15 years of experience, SriZen Group delivers engineered solutions across construction, infrastructure, commercial, residential and industrial projects with precision and scale.
           </p>
 
           <div

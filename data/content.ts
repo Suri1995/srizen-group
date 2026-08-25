@@ -227,7 +227,7 @@ export const projects: Project[] = [
     loc: "Peerzadiguda, Uppal, Hyderabad",
     cat: "residential",
     img: "/golden-rise/hero.jpg",
-    client: "Fuzen Group Infra Projects (Bandi Jangaiah)",
+    client: "Srizen Group Infra Projects (Bandi Jangaiah)",
     completed: "HMDA Approved · TG RERA P02200007793",
     area: "2 & 3 BHK · 1265 – 2155 sq. ft.",
     technologies: [
@@ -249,7 +249,7 @@ export const projects: Project[] = [
     loc: "Chengicherla, Uppal, Hyderabad",
     cat: "residential",
     img: "/park-edge/hero.jpg",
-    client: "Fuzen Group Infra Projects",
+    client: "Srizen Group Infra Projects",
     completed: "HMDA Approved · TSRERA P02200007319",
     area: "2 & 3 BHK Premium Gated Community",
     technologies: [

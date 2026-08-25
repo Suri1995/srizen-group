@@ -18,7 +18,7 @@ export default function Home() {
       <MarqueeStrip />
       {/* <Stats /> */}
       <AboutTeaser />
-      <ServicesTeaser />
+      {/* <ServicesTeaser /> */}
       <ProjectsCarouselSection />
       <WhyChoose />
       <Testimonials />
