@@ -54,14 +54,14 @@ export const Hero = forwardRef<HTMLDivElement>((props, ref) => {
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
-            href="#contact"
+            href="/contact"
             className="group btn btn-primary bg-cyan text-[#00072e] hover:bg-white transition-colors duration-300"
           >
             Enquire Now
             <ArrowUpRight className="arrow h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
           <a
-            href="#configurations"
+            href="#floor-plans"
             className="group btn btn-ghost border border-white/20 text-white hover:border-cyan/60 hover:text-cyan transition-colors duration-300"
           >
             View Villa Plans

@@ -38,26 +38,26 @@ const SERVICE_MEDIA: Record<string, { image: string; icon: LucideIcon }> = {
     image: "https://images.unsplash.com/photo-1778961419928-2968ddd57c05?fm=jpg&q=80&w=1600&auto=format&fit=crop",
     icon: Building,
   },
-  "industrial-projects": {
-    image: "https://images.unsplash.com/photo-1740914994657-f1cdffdc418e?fm=jpg&q=80&w=1600&auto=format&fit=crop",
-    icon: Factory,
-  },
+  // "industrial-projects": {
+  //   image: "https://images.unsplash.com/photo-1740914994657-f1cdffdc418e?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+  //   icon: Factory,
+  // },
   "infrastructure-development": {
     image: "https://images.unsplash.com/photo-1563391017873-6e6beab67fed?fm=jpg&q=80&w=1600&auto=format&fit=crop",
     icon: Construction,
   },
-  "turnkey-projects": {
-    image: "https://images.unsplash.com/photo-1521790797524-b2497295b8a0?fm=jpg&q=80&w=1600&auto=format&fit=crop",
-    icon: KeyRound,
-  },
+  // "turnkey-projects": {
+  //   image: "https://images.unsplash.com/photo-1521790797524-b2497295b8a0?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+  //   icon: KeyRound,
+  // },
   "civil-engineering": {
     image: "https://images.unsplash.com/photo-1629642971893-1f46ed9be126?fm=jpg&q=80&w=1600&auto=format&fit=crop",
     icon: Ruler,
   },
-  "mep-services": {
-    image: "https://images.unsplash.com/photo-1576446470246-499c738d1c8e?fm=jpg&q=80&w=1600&auto=format&fit=crop",
-    icon: Zap,
-  },
+  // "mep-services": {
+  //   image: "https://images.unsplash.com/photo-1576446470246-499c738d1c8e?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+  //   icon: Zap,
+  // },
   "interior-fit-outs": {
     image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?fm=jpg&q=80&w=1600&auto=format&fit=crop",
     icon: Armchair,
@@ -256,10 +256,10 @@ export default function Services() {
                           {currentService.detail}
                         </p>
                       )}
-                      <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium tracking-wide text-cyan">
+                      {/* <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium tracking-wide text-cyan">
                         Learn more
                         <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </motion.div>

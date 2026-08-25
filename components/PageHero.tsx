@@ -24,9 +24,9 @@ export default function PageHero({
   image,
   crumb,
   stats = [
-    { value: "20+", label: "Years of Excellence" },
-    { value: "320+", label: "Team Strength" },
-    { value: "26", label: "Cities" },
+    { value: "18+", label: "Years of Excellence" },
+    { value: "150+", label: "Team Strength" },
+    { value: "250+", label: "Residential Spaces Delivered" },
   ],
 }: PageHeroProps) {
   // Ensure page scrolls to top when hero mounts

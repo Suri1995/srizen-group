@@ -267,7 +267,7 @@ export default function About() {
                   </div>
                   <div>
                     <div className="text-[11px] font-semibold text-foreground">Trusted Builder</div>
-                    <div className="text-[9px] text-muted-foreground tracking-wider uppercase">5000+ Families</div>
+                    <div className="text-[9px] text-muted-foreground tracking-wider uppercase">500+ Families</div>
                   </div>
                 </div>
               </motion.div>

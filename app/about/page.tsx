@@ -17,13 +17,13 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About SriZen Group"
         title="Two decades of engineering excellence"
-        subtitle="From a single civil engineering contract to a 320-strong team delivering projects across 26 cities — this is the story of SriZen Group."
+        subtitle="From a single civil engineering contract to a 150-strong team delivering projects across Hyderabad — SriZen Group’s journey reflects a commitment to excellence, innovation, and enduring impact."
         image="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2400&auto=format&fit=crop"
         crumb="About"
       />
       <About />
-      <Timeline />
-      <Leadership />
+      {/* <Timeline /> */}
+      {/* <Leadership /> */}
       <CTABanner />
     </>
   );
